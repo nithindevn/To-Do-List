@@ -11,31 +11,42 @@ protocol deleteDataDelegate{
     func deleteItem(atIndex: Int)
 }
 class ViewItemController: UIViewController {
-    var viewTitle: String!
-    var viewDesc:String!
-    var viewDate:String!
     var index: Int!
+    var data: ToDoItem!
     var dele: deleteDataDelegate? = nil
     @IBOutlet weak var viewItemTitle: UITextField!
     @IBOutlet weak var viewItemDate: UITextField!
     @IBOutlet weak var viewItemDesc: UITextView!
     
     @IBAction func deleteClicked(sender: AnyObject) {
-        if dele != nil {
-            dele!.deleteItem(index)
-            self.navigationController?.popViewControllerAnimated(true)
+        let myAlert = UIAlertController(title: "Are you sure?", message: "This will permanently delete the item", preferredStyle: UIAlertControllerStyle.Alert)
+        let deleteAction = UIAlertAction(title: "Delete", style: UIAlertActionStyle.Destructive)
+        {(ACTION) in
             
+            if self.dele != nil {
+                self.dele!.deleteItem(self.index)
+                self.navigationController?.popViewControllerAnimated(true)
+                
+            }
         }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel)
+        {(ACTION) in}
+        
+        myAlert.addAction(deleteAction)
+        myAlert.addAction(cancelAction)
+        self.presentViewController(myAlert, animated: true, completion: nil)
+        
         
     }
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        viewItemTitle.text = viewTitle
-        viewItemDesc.text = viewDesc
-        viewItemDate.text = viewDate
+        self.title = data.text
+        viewItemTitle.text = data.text
+        viewItemDesc.text = data.desc
+        viewItemDate.text = data.date
         
     }
     

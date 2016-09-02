@@ -63,12 +63,12 @@
 				EF3CF3071D754606005F141B /* AppDelegate.swift */,
 				EF3CF3091D754606005F141B /* ViewController.swift */,
 				EFF90EBC1D7589FE00DB77E1 /* AddItem.swift */,
+				EF04F1011D780514007D4EB8 /* ViewItemController.swift */,
 				EF3CF3191D75491E005F141B /* ToDoItem.swift */,
 				EF3CF30B1D754606005F141B /* Main.storyboard */,
 				EF3CF30E1D754606005F141B /* Assets.xcassets */,
 				EF3CF3101D754606005F141B /* LaunchScreen.storyboard */,
 				EF3CF3131D754606005F141B /* Info.plist */,
-				EF04F1011D780514007D4EB8 /* ViewItemController.swift */,
 			);
 			path = "To Do List";
 			sourceTree = "<group>";

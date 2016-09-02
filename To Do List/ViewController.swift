@@ -13,10 +13,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var table: UITableView!
     var toDoItems = [ToDoItem]()
     var addItem = AddItem()
-    var globalTitle: String!
-    var globalDesc: String!
-    var globalDate: String!
-    var globalRow: Int!
+    var globalRow:Int!
+    var globalData: ToDoItem!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -79,10 +77,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let row = indexPath.row
-        globalTitle = toDoItems[row].text
-        globalDesc = toDoItems[row].desc
-        globalDate = toDoItems[row].date
         globalRow = row
+        globalData = toDoItems[row]
+        
         self.performSegueWithIdentifier("viewitem", sender: nil);
         
     }
@@ -102,11 +99,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if  segue.identifier == "viewitem" {
             
             let destination: ViewItemController = segue.destinationViewController as! ViewItemController
-            destination.viewTitle = globalTitle
-            destination.viewDesc = globalDesc
-            destination.viewDate = globalDate
-            destination.index = globalRow
             destination.dele=self
+            destination.data = globalData
+            destination.index = globalRow
             
         }
     }

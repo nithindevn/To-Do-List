@@ -13,7 +13,7 @@ protocol dataEnteredDelegate{
     func userEnteredInfo(infotitle: NSString, infoDesc: NSString, infoDate: NSString)
 }
 
-class AddItem: UIViewController {
+class AddItem: UIViewController,UITextFieldDelegate {
 
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var descField: UITextView!
@@ -23,25 +23,41 @@ class AddItem: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //dateField.userInteractionEnabled = false
+        dateField.delegate = self
         
     }
-    
-    
+    //UITextFieldDelegate method-->calls whenever the current text changes
+     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        return false
+    }
     
     
     //Clicked on Save
     @IBAction func clickedOnSave(sender: AnyObject) {
-        var itemTitle, itemDesc, itemDate : String
-        itemTitle = titleField.text!
-        itemDesc = descField.text!
-        itemDate = dateField.text!
-        if (delegate != nil){
+        if titleField.text == "" {
+            let myAlert = UIAlertController(title: "Warning", message: "Title can't be empty", preferredStyle: UIAlertControllerStyle.Alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default){(ACTION) in}
+            myAlert.addAction(okAction)
+            self.presentViewController(myAlert, animated: true, completion: nil)
+            
+        }
+
+        else {
         
-            delegate!.userEnteredInfo(itemTitle, infoDesc: itemDesc, infoDate: itemDate)
-            //let nav = self.navigationController!;
-            //let controller = nav.viewControllers[0] as! ViewController;
-            //controller.toDoItems.append(ToDoItem(text: itemTitle as String))
-            self.navigationController?.popViewControllerAnimated(true)
+            var itemTitle, itemDesc, itemDate : String
+            itemTitle = titleField.text!
+            itemDesc = descField.text!
+            itemDate = dateField.text!
+            if (delegate != nil){
+                
+                delegate!.userEnteredInfo(itemTitle, infoDesc: itemDesc, infoDate: itemDate)
+                //let nav = self.navigationController!;
+                //let controller = nav.viewControllers[0] as! ViewController;
+                //controller.toDoItems.append(ToDoItem(text: itemTitle as String))
+                self.navigationController?.popViewControllerAnimated(true)
+        
+        }
         }
         
         

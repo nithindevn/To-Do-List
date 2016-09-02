@@ -75,7 +75,7 @@
                                     <constraint firstAttribute="width" constant="200" id="x3V-Cw-CNJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJt-yS-uiB">
                                 <rect key="frame" x="16" y="122" width="93" height="21"/>
@@ -146,7 +146,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="eC2-iT-3xk"/>
+                    <navigationItem key="navigationItem" title="Add Item" id="eC2-iT-3xk"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="dateField" destination="Yy0-V1-Lqg" id="7yZ-ou-IxB"/>
@@ -158,7 +158,7 @@
             </objects>
             <point key="canvasLocation" x="952" y="289"/>
         </scene>
-        <!--12325-->
+        <!--View Item-->
         <scene sceneID="bXG-kX-UdG">
             <objects>
                 <viewController id="Y1M-Ts-dLi" customClass="ViewItemController" customModule="To_Do_List" customModuleProvider="target" sceneMemberID="viewController">
@@ -167,13 +167,13 @@
                         <viewControllerLayoutGuide type="bottom" id="l0U-jz-kbA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WVB-rw-Lrg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YSs-Es-Sqi">
                                 <rect key="frame" x="16" y="76" width="38" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cxq-qk-JHt">
@@ -187,13 +187,13 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAk-Pw-xOb">
                                 <rect key="frame" x="16" y="122" width="93" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9B-uA-Nxb">
                                 <rect key="frame" x="16" y="271" width="41" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ySZ-xx-lWG">
@@ -205,14 +205,14 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6SV-bz-MEk">
-                                <rect key="frame" x="138" y="400" width="45" height="30"/>
+                                <rect key="frame" x="165" y="400" width="45" height="30"/>
                                 <state key="normal" title="Delete"/>
                                 <connections>
                                     <action selector="deleteClicked:" destination="Y1M-Ts-dLi" eventType="touchUpInside" id="Bmi-mP-dDF"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dUE-f7-yEq">
-                                <rect key="frame" x="117" y="116" width="184" height="134"/>
+                                <rect key="frame" x="117" y="116" width="239" height="134"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="134" id="g32-Y6-1rt"/>
@@ -240,7 +240,8 @@
                             <constraint firstItem="dUE-f7-yEq" firstAttribute="leading" secondItem="TAk-Pw-xOb" secondAttribute="trailing" constant="8" symbolic="YES" id="ziP-F4-gXg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="12325" id="hOO-dn-1RF"/>
+                    <navigationItem key="navigationItem" title="View Item" id="hOO-dn-1RF"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="viewItemDate" destination="ySZ-xx-lWG" id="qDQ-Nh-GRQ"/>
                         <outlet property="viewItemDesc" destination="dUE-f7-yEq" id="jQZ-bR-Ofq"/>
