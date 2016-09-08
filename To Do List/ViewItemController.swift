@@ -10,7 +10,7 @@ import UIKit
 protocol deleteDataDelegate{
     func deleteItem(atIndex: Int)
 }
-class ViewItemController: UIViewController {
+class ViewItemController: UIViewController,UITextFieldDelegate,UITextViewDelegate {
     var index: Int!
     var data: ToDoItem!
     var dele: deleteDataDelegate? = nil
@@ -44,11 +44,25 @@ class ViewItemController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        viewItemTitle.delegate=self
+        viewItemDate.delegate=self
+        viewItemDesc.delegate=self
         self.title = data.text
         viewItemTitle.text = data.text
         viewItemDesc.text = data.desc
         viewItemDate.text = data.date
         
     }
+    
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        return false
+    }
+    
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+        return false
+    }
+    
+    
     
 }
