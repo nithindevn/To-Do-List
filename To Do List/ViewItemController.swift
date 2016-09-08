@@ -21,7 +21,7 @@ class ViewItemController: UIViewController {
     @IBAction func deleteClicked(sender: AnyObject) {
         let myAlert = UIAlertController(title: "Are you sure?", message: "This will permanently delete the item", preferredStyle: UIAlertControllerStyle.Alert)
         let deleteAction = UIAlertAction(title: "Delete", style: UIAlertActionStyle.Destructive)
-        {(ACTION) in
+        {(action) in
             
             if self.dele != nil {
                 self.dele!.deleteItem(self.index)
@@ -30,8 +30,9 @@ class ViewItemController: UIViewController {
             }
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel)
-        {(ACTION) in}
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        
+        
         
         myAlert.addAction(deleteAction)
         myAlert.addAction(cancelAction)

@@ -13,7 +13,7 @@ protocol dataEnteredDelegate{
     func userEnteredInfo(infotitle: NSString, infoDesc: NSString, infoDate: NSString)
 }
 
-class AddItem: UIViewController,UITextFieldDelegate {
+class AddItem: UIViewController,UITextFieldDelegate{
 
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var descField: UITextView!
@@ -26,7 +26,19 @@ class AddItem: UIViewController,UITextFieldDelegate {
         //dateField.userInteractionEnabled = false
         dateField.delegate = self
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AddItem.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+
+        
     }
+    
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+
+    
+    
     //UITextFieldDelegate method-->calls whenever the current text changes
      func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         return false

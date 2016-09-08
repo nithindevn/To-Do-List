@@ -21,7 +21,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         table.dataSource = self
         table.delegate = self
         table.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        table.scrollEnabled = true
        
         if toDoItems.count > 0 {
             return
