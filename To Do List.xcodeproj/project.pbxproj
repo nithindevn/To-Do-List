@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EF04F1021D780514007D4EB8 /* ViewItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF04F1011D780514007D4EB8 /* ViewItemController.swift */; };
+		EF32BDDF1D866678000BB109 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF32BDDE1D866678000BB109 /* CoreData.framework */; };
 		EF3CF3081D754606005F141B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3CF3071D754606005F141B /* AppDelegate.swift */; };
 		EF3CF30A1D754606005F141B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3CF3091D754606005F141B /* ViewController.swift */; };
 		EF3CF30D1D754606005F141B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF3CF30B1D754606005F141B /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		EF04F1011D780514007D4EB8 /* ViewItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewItemController.swift; sourceTree = "<group>"; };
+		EF32BDDE1D866678000BB109 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		EF3CF3041D754606005F141B /* To Do List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "To Do List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF3CF3071D754606005F141B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF3CF3091D754606005F141B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF32BDDF1D866678000BB109 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +47,7 @@
 		EF3CF2FB1D754606005F141B = {
 			isa = PBXGroup;
 			children = (
+				EF32BDDE1D866678000BB109 /* CoreData.framework */,
 				EF3CF3061D754606005F141B /* To Do List */,
 				EF3CF3051D754606005F141B /* Products */,
 			);
