@@ -8,19 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		EF04F1021D780514007D4EB8 /* ViewItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF04F1011D780514007D4EB8 /* ViewItemController.swift */; };
-		EF32BDDF1D866678000BB109 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF32BDDE1D866678000BB109 /* CoreData.framework */; };
 		EF3CF3081D754606005F141B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3CF3071D754606005F141B /* AppDelegate.swift */; };
 		EF3CF30A1D754606005F141B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3CF3091D754606005F141B /* ViewController.swift */; };
 		EF3CF30D1D754606005F141B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF3CF30B1D754606005F141B /* Main.storyboard */; };
 		EF3CF30F1D754606005F141B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF3CF30E1D754606005F141B /* Assets.xcassets */; };
 		EF3CF3121D754606005F141B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF3CF3101D754606005F141B /* LaunchScreen.storyboard */; };
-		EF3CF31A1D75491E005F141B /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3CF3191D75491E005F141B /* ToDoItem.swift */; };
+		EF40C1B81D8685FC007E5825 /* To_Do_List.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EF40C1B61D8685FC007E5825 /* To_Do_List.xcdatamodeld */; };
+		EF40C1BB1D86871E007E5825 /* List+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF40C1B91D86871E007E5825 /* List+CoreDataProperties.swift */; };
+		EF40C1BC1D86871E007E5825 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF40C1BA1D86871E007E5825 /* List.swift */; };
+		EF40C1BE1D8688B8007E5825 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF40C1BD1D8688B8007E5825 /* DataController.swift */; };
 		EFF90EBD1D7589FE00DB77E1 /* AddItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF90EBC1D7589FE00DB77E1 /* AddItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EF04F1011D780514007D4EB8 /* ViewItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewItemController.swift; sourceTree = "<group>"; };
-		EF32BDDE1D866678000BB109 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		EF3CF3041D754606005F141B /* To Do List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "To Do List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF3CF3071D754606005F141B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF3CF3091D754606005F141B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -28,7 +29,10 @@
 		EF3CF30E1D754606005F141B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EF3CF3111D754606005F141B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EF3CF3131D754606005F141B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EF3CF3191D75491E005F141B /* ToDoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
+		EF40C1B71D8685FC007E5825 /* To_Do_List.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = To_Do_List.xcdatamodel; sourceTree = "<group>"; };
+		EF40C1B91D86871E007E5825 /* List+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "List+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EF40C1BA1D86871E007E5825 /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		EF40C1BD1D8688B8007E5825 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		EFF90EBC1D7589FE00DB77E1 /* AddItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -37,7 +41,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF32BDDF1D866678000BB109 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,7 +50,8 @@
 		EF3CF2FB1D754606005F141B = {
 			isa = PBXGroup;
 			children = (
-				EF32BDDE1D866678000BB109 /* CoreData.framework */,
+				EF40C1B91D86871E007E5825 /* List+CoreDataProperties.swift */,
+				EF40C1BA1D86871E007E5825 /* List.swift */,
 				EF3CF3061D754606005F141B /* To Do List */,
 				EF3CF3051D754606005F141B /* Products */,
 			);
@@ -68,11 +72,12 @@
 				EF3CF3091D754606005F141B /* ViewController.swift */,
 				EFF90EBC1D7589FE00DB77E1 /* AddItem.swift */,
 				EF04F1011D780514007D4EB8 /* ViewItemController.swift */,
-				EF3CF3191D75491E005F141B /* ToDoItem.swift */,
 				EF3CF30B1D754606005F141B /* Main.storyboard */,
 				EF3CF30E1D754606005F141B /* Assets.xcassets */,
 				EF3CF3101D754606005F141B /* LaunchScreen.storyboard */,
 				EF3CF3131D754606005F141B /* Info.plist */,
+				EF40C1B61D8685FC007E5825 /* To_Do_List.xcdatamodeld */,
+				EF40C1BD1D8688B8007E5825 /* DataController.swift */,
 			);
 			path = "To Do List";
 			sourceTree = "<group>";
@@ -149,10 +154,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFF90EBD1D7589FE00DB77E1 /* AddItem.swift in Sources */,
+				EF40C1BC1D86871E007E5825 /* List.swift in Sources */,
+				EF40C1B81D8685FC007E5825 /* To_Do_List.xcdatamodeld in Sources */,
 				EF04F1021D780514007D4EB8 /* ViewItemController.swift in Sources */,
+				EF40C1BE1D8688B8007E5825 /* DataController.swift in Sources */,
 				EF3CF30A1D754606005F141B /* ViewController.swift in Sources */,
 				EF3CF3081D754606005F141B /* AppDelegate.swift in Sources */,
-				EF3CF31A1D75491E005F141B /* ToDoItem.swift in Sources */,
+				EF40C1BB1D86871E007E5825 /* List+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +313,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		EF40C1B61D8685FC007E5825 /* To_Do_List.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EF40C1B71D8685FC007E5825 /* To_Do_List.xcdatamodel */,
+			);
+			currentVersion = EF40C1B71D8685FC007E5825 /* To_Do_List.xcdatamodel */;
+			path = To_Do_List.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = EF3CF2FC1D754606005F141B /* Project object */;
 }

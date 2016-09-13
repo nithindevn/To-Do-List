@@ -115,7 +115,7 @@ class AddItem: UIViewController,UITextFieldDelegate,UITextViewDelegate{
     @IBAction func clickedOnSave(sender: AnyObject) {
         if titleField.text == "" {
             let myAlert = UIAlertController(title: "Warning", message: "Title can't be empty", preferredStyle: UIAlertControllerStyle.Alert)
-            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default){(ACTION) in}
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil)
             myAlert.addAction(okAction)
             self.presentViewController(myAlert, animated: true, completion: nil)
             
