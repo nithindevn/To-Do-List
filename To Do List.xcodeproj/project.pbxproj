@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EF04F1021D780514007D4EB8 /* ViewItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF04F1011D780514007D4EB8 /* ViewItemController.swift */; };
+		EF3BFC321D90063B00ACA17D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3BFC311D90063B00ACA17D /* Item.swift */; };
 		EF3CF3081D754606005F141B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3CF3071D754606005F141B /* AppDelegate.swift */; };
 		EF3CF30A1D754606005F141B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3CF3091D754606005F141B /* ViewController.swift */; };
 		EF3CF30D1D754606005F141B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF3CF30B1D754606005F141B /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		EF04F1011D780514007D4EB8 /* ViewItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewItemController.swift; sourceTree = "<group>"; };
+		EF3BFC311D90063B00ACA17D /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		EF3CF3041D754606005F141B /* To Do List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "To Do List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF3CF3071D754606005F141B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF3CF3091D754606005F141B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -53,7 +55,6 @@
 				EF40C1B91D86871E007E5825 /* List+CoreDataProperties.swift */,
 				EF40C1BA1D86871E007E5825 /* List.swift */,
 				EF3CF3061D754606005F141B /* To Do List */,
-				EF3CF3051D754606005F141B /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +64,7 @@
 				EF3CF3041D754606005F141B /* To Do List.app */,
 			);
 			name = Products;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		EF3CF3061D754606005F141B /* To Do List */ = {
@@ -72,12 +74,14 @@
 				EF3CF3091D754606005F141B /* ViewController.swift */,
 				EFF90EBC1D7589FE00DB77E1 /* AddItem.swift */,
 				EF04F1011D780514007D4EB8 /* ViewItemController.swift */,
+				EF3BFC311D90063B00ACA17D /* Item.swift */,
+				EF40C1BD1D8688B8007E5825 /* DataController.swift */,
 				EF3CF30B1D754606005F141B /* Main.storyboard */,
 				EF3CF30E1D754606005F141B /* Assets.xcassets */,
 				EF3CF3101D754606005F141B /* LaunchScreen.storyboard */,
 				EF3CF3131D754606005F141B /* Info.plist */,
 				EF40C1B61D8685FC007E5825 /* To_Do_List.xcdatamodeld */,
-				EF40C1BD1D8688B8007E5825 /* DataController.swift */,
+				EF3CF3051D754606005F141B /* Products */,
 			);
 			path = "To Do List";
 			sourceTree = "<group>";
@@ -154,6 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFF90EBD1D7589FE00DB77E1 /* AddItem.swift in Sources */,
+				EF3BFC321D90063B00ACA17D /* Item.swift in Sources */,
 				EF40C1BC1D86871E007E5825 /* List.swift in Sources */,
 				EF40C1B81D8685FC007E5825 /* To_Do_List.xcdatamodeld in Sources */,
 				EF04F1021D780514007D4EB8 /* ViewItemController.swift in Sources */,

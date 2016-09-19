@@ -109,9 +109,6 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
-                                                <connections>
-                                                    <action selector="editingText:" destination="yzs-do-or1" eventType="editingDidEnd" id="Kpa-iv-7pI"/>
-                                                </connections>
                                             </textField>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4jA-II-oqP">
                                                 <rect key="frame" x="16" y="134" width="200" height="128"/>

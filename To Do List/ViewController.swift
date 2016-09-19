@@ -10,70 +10,58 @@ import UIKit
 import CoreData
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, dataEnteredDelegate, deleteDataDelegate {
-
-    let managedContext = DataController().managedObjectContext
+    let context=DataController()
     @IBOutlet weak var table: UITableView!
     var globalRow:Int!
     var globalObject: NSManagedObject!
-    var list=[NSManagedObject]()
+    var list=[List]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         table.dataSource = self
         table.delegate = self
         table.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-       
-       
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        reloadData()
+        
+        do{
+            try list=context.reloadTableData()
+        
+        } catch DataController.CoreDataError.RetrievalError {
+            print("Retrieval Error")
+        }catch{
+            print("Other Retrieval Errors")
+        }
     }
     
     
     //AddItem delegate methods
-    func userEnteredInfo(infotitle: NSString, infoDesc: NSString, infoDate: NSString) {
-        
-        let entity =  NSEntityDescription.entityForName("List",inManagedObjectContext:managedContext)
-        
-        let object = NSManagedObject(entity: entity!,insertIntoManagedObjectContext: managedContext)
-    
-        object.setValue(infotitle as String, forKey: "title")
-        object.setValue(infoDesc as String, forKey: "desc")
-        object.setValue(infoDate as String, forKey: "date")
-        
-        do {
-            try managedContext.save()
+    func userEnteredInfo(addToList:Item) {
+        do{
+            let object = try context.insertData(addToList)
             list.append(object)
-        } catch let error as NSError  {
-            print("Could not save \(error), \(error.userInfo)")
+            table.reloadData()
+        }catch DataController.CoreDataError.InsertError{
+            print("Insertion Error")
+        }catch{
+            print("Other Insertion Errors")
         }
-        
-        table.reloadData()
-        
-        
-        }
-    
-   
+    }
     
     //ViewItemControllerDelegatemethod
     func deleteItem(atIndex: Int ){
-
-        managedContext.deleteObject(list[atIndex] as NSManagedObject)
-        
         do {
-            try managedContext.save()
+            try context.deleteData(list, index:atIndex)
             list.removeAtIndex(atIndex)
-        } catch let error as NSError  {
-            print("Could not save \(error), \(error.userInfo)")
+        }catch DataController.CoreDataError.DeleteError{
+            print("Deletion Error ")
+        }catch{
+            print("Other Deletion Errors")
         }
-
-        
-        
         table.reloadData()
     }
-    
     
     //UITableviewDelegate methods
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -89,7 +77,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCellWithIdentifier("cell",
                                                                forIndexPath: indexPath)
         let item = list[indexPath.row]
-        cell.textLabel?.text = item.valueForKey("title") as? String
+        cell.textLabel?.text = item.title
         cell.backgroundColor = UIColor.orangeColor()
         return cell
     }
@@ -104,23 +92,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let row = indexPath.row
         globalRow = row
         self.performSegueWithIdentifier("viewitem", sender: nil);
-        
     }
     
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         //Segue to AddItem
         if segue.identifier == "showAddItem" {
             let destination:AddItem = segue.destinationViewController as! AddItem
             destination.delegate = self
-            
         }
-        
         
         //Segue to viewItem
         if  segue.identifier == "viewitem" {
-            
             let destination: ViewItemController = segue.destinationViewController as! ViewItemController
             destination.dele=self
             //destination.data = globalObject
@@ -128,31 +110,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             destination.viewTitle=String(list[globalRow].valueForKey("title")!)
             destination.viewDesc=String(list[globalRow].valueForKey("desc")!)
             destination.viewDate=String(list[globalRow].valueForKey("date")!)
-            
         }
     }
-    
-    
-    
-    func reloadData(){
-
-        let fetchRequest = NSFetchRequest(entityName: "List")
-        do {
-            let results =
-                try managedContext.executeFetchRequest(fetchRequest)
-            list = results as! [NSManagedObject]
-            
-        } catch let error as NSError {
-            print("Could not fetch \(error), \(error.userInfo)")
-        }
-
-    
-    
-    
-    }
-   
-        
-
-    
 }
 

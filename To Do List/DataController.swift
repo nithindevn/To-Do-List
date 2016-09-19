@@ -9,7 +9,14 @@
 import UIKit
 import CoreData
 class DataController: NSObject {
-    var managedObjectContext: NSManagedObjectContext
+    private var managedObjectContext: NSManagedObjectContext
+    
+    enum CoreDataError: ErrorType {
+        case RetrievalError
+        case InsertError
+        case DeleteError
+    }
+    
     override init() {
         // This resource is the same name as your xcdatamodeld contained in your project.
         guard let modelURL = NSBundle.mainBundle().URLForResource("To_Do_List", withExtension:"momd") else {
@@ -36,4 +43,46 @@ class DataController: NSObject {
             }
         }
     }
+    
+    //Populate Table at Launch
+    func reloadTableData() throws -> [List]{
+        
+        let fetchRequest = NSFetchRequest(entityName: "List")
+        let results =   try? self.managedObjectContext.executeFetchRequest(fetchRequest)
+        guard  results != nil  else{
+            throw CoreDataError.RetrievalError
+            
+        
+        }
+        return results as! [List]
+            
+        
+        }
+    //Insert into CoreData
+    func insertData(addToList:Item) throws -> List{
+        let entity =  NSEntityDescription.entityForName("List",inManagedObjectContext:self.managedObjectContext)
+        
+        let object = NSManagedObject(entity: entity!,insertIntoManagedObjectContext: self.managedObjectContext)
+        
+        object.setValue(addToList.title, forKey: "title")
+        object.setValue(addToList.desc, forKey: "desc")
+        object.setValue(addToList.date, forKey: "date")
+        
+        let result=try? self.managedObjectContext.save()
+        guard result != nil else{
+            throw CoreDataError.InsertError
+        }
+        return object as! List
+        
+    }
+    
+    func deleteData(list:[List], index: Int) throws {
+        self.managedObjectContext.deleteObject(list[index] as NSManagedObject)
+        let result=try? self.managedObjectContext.save()
+        guard result != nil else{
+            throw CoreDataError.DeleteError
+        }
+    }
 }
+    
+    
