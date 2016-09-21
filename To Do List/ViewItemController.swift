@@ -23,6 +23,7 @@ class ViewItemController: UIViewController,UITextFieldDelegate,UITextViewDelegat
     @IBOutlet weak var viewItemDate: UITextField!
     @IBOutlet weak var viewItemDesc: UITextView!
     
+    @IBOutlet weak var editItem: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         viewItemTitle.delegate=self
@@ -32,16 +33,23 @@ class ViewItemController: UIViewController,UITextFieldDelegate,UITextViewDelegat
         viewItemTitle.text = viewTitle
         viewItemDesc.text = viewDesc
         viewItemDate.text = viewDate
+        viewItemTitle.userInteractionEnabled=false
+        viewItemDate.userInteractionEnabled=false
+        viewItemDesc.userInteractionEnabled=false
     }
     
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
-        return false
-    }
-    
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        return false
-    }
+//    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+//        return false
+//    }
+//    
+//    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+//        return false
+//    }
 
+    //Clicked on Edit
+    @IBAction func editClicked(sender: UIButton) {
+        viewItemTitle.userInteractionEnabled=true
+    }
     //Clicked on Delete
     @IBAction func deleteClicked(sender: AnyObject) {
         let myAlert = UIAlertController(title: "Are you sure?", message: "This will permanently delete the item", preferredStyle: UIAlertControllerStyle.Alert)

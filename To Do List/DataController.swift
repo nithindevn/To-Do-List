@@ -9,13 +9,13 @@
 import UIKit
 import CoreData
 class DataController: NSObject {
-    private var managedObjectContext: NSManagedObjectContext
-    
+    private  var managedObjectContext: NSManagedObjectContext
     enum CoreDataError: ErrorType {
         case RetrievalError
         case InsertError
         case DeleteError
     }
+    static var sharedInstance=DataController()
     
     override init() {
         // This resource is the same name as your xcdatamodeld contained in your project.
@@ -55,24 +55,26 @@ class DataController: NSObject {
         
         }
         return results as! [List]
-            
-        
-        }
+    }
     //Insert into CoreData
     func insertData(addToList:Item) throws -> List{
         let entity =  NSEntityDescription.entityForName("List",inManagedObjectContext:self.managedObjectContext)
         
-        let object = NSManagedObject(entity: entity!,insertIntoManagedObjectContext: self.managedObjectContext)
+        let object = NSManagedObject(entity: entity!,insertIntoManagedObjectContext: self.managedObjectContext) as! List
         
-        object.setValue(addToList.title, forKey: "title")
-        object.setValue(addToList.desc, forKey: "desc")
-        object.setValue(addToList.date, forKey: "date")
+        //object.setValue(addToList.title, forKey: "title")
+        //object.setValue(addToList.desc, forKey: "desc")
+        //object.setValue(addToList.date, forKey: "date")
+        
+        object.title = addToList.title
+        object.desc = addToList.desc
+        object.date = addToList.date
         
         let result=try? self.managedObjectContext.save()
         guard result != nil else{
             throw CoreDataError.InsertError
         }
-        return object as! List
+        return object
         
     }
     

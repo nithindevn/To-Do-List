@@ -48,7 +48,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="565" y="289"/>
+            <point key="canvasLocation" x="561" y="159"/>
         </scene>
         <!--Add Item-->
         <scene sceneID="odV-v4-1dj">
@@ -301,7 +301,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jmS-P1-GD8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="973" y="327"/>
+            <point key="canvasLocation" x="959" y="325"/>
         </scene>
         <!--View Item-->
         <scene sceneID="bXG-kX-UdG">
@@ -312,7 +312,7 @@
                         <viewControllerLayoutGuide type="bottom" id="l0U-jz-kbA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WVB-rw-Lrg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vmy-V6-AM8">
@@ -360,10 +360,17 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mBY-aL-07e">
-                                <rect key="frame" x="165" y="508" width="45" height="30"/>
+                                <rect key="frame" x="267" y="508" width="45" height="30"/>
                                 <state key="normal" title="Delete"/>
                                 <connections>
                                     <action selector="deleteClicked:" destination="Y1M-Ts-dLi" eventType="touchUpInside" id="fwe-PT-Bnh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAm-Od-rqc">
+                                <rect key="frame" x="16" y="508" width="30" height="30"/>
+                                <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="editClicked:" destination="Y1M-Ts-dLi" eventType="touchUpInside" id="I8R-Qg-9Nx"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -377,22 +384,29 @@
                                 <variation key="heightClass=compact" constant="117"/>
                             </constraint>
                             <constraint firstItem="Vmy-V6-AM8" firstAttribute="leading" secondItem="WVB-rw-Lrg" secondAttribute="leading" constant="16" id="9tb-2Q-0a4"/>
-                            <constraint firstItem="mBY-aL-07e" firstAttribute="centerX" secondItem="WVB-rw-Lrg" secondAttribute="centerX" id="AKr-vx-lop"/>
                             <constraint firstItem="fAw-MI-Xmr" firstAttribute="leading" secondItem="Vod-Vt-mmb" secondAttribute="trailing" constant="8" id="Cs3-Bl-zc5">
                                 <variation key="heightClass=compact" constant="1"/>
                             </constraint>
                             <constraint firstItem="Vod-Vt-mmb" firstAttribute="leading" secondItem="WVB-rw-Lrg" secondAttribute="leading" constant="16" id="FUx-Dh-Fmn">
                                 <variation key="heightClass=compact" constant="13"/>
                             </constraint>
+                            <constraint firstItem="GAm-Od-rqc" firstAttribute="leading" secondItem="WVB-rw-Lrg" secondAttribute="leading" constant="16" id="Fq7-Vx-RQk"/>
                             <constraint firstItem="fAw-MI-Xmr" firstAttribute="top" secondItem="GVk-8x-NbY" secondAttribute="bottom" constant="203" id="G7Q-Mm-J1l">
                                 <variation key="heightClass=compact" constant="134"/>
                             </constraint>
                             <constraint firstItem="Vmy-V6-AM8" firstAttribute="top" secondItem="9wj-Ls-aCT" secondAttribute="bottom" constant="73" id="K3L-r6-Xe4"/>
+                            <constraint firstItem="GAm-Od-rqc" firstAttribute="leading" secondItem="fAw-MI-Xmr" secondAttribute="leading" id="LdZ-PH-bCr"/>
+                            <constraint firstAttribute="trailing" secondItem="mBY-aL-07e" secondAttribute="trailing" constant="8" id="M0f-Xy-mdb"/>
                             <constraint firstItem="GVk-8x-NbY" firstAttribute="leading" secondItem="WVB-rw-Lrg" secondAttribute="leading" constant="16" id="MGR-ch-ahW"/>
+                            <constraint firstItem="GAm-Od-rqc" firstAttribute="top" secondItem="Vod-Vt-mmb" secondAttribute="bottom" constant="23" id="NWO-LR-hVX"/>
                             <constraint firstItem="GVk-8x-NbY" firstAttribute="top" secondItem="Wma-Ms-wxi" secondAttribute="bottom" constant="271" id="NyD-Z1-1BP"/>
+                            <constraint firstItem="GAm-Od-rqc" firstAttribute="top" secondItem="fAw-MI-Xmr" secondAttribute="bottom" constant="88" id="RQG-Ac-tzA">
+                                <variation key="heightClass=compact" constant="18"/>
+                            </constraint>
                             <constraint firstItem="Wma-Ms-wxi" firstAttribute="leading" secondItem="WVB-rw-Lrg" secondAttribute="leading" constant="16" id="Wf0-kt-mc3">
                                 <variation key="heightClass=compact" constant="62"/>
                             </constraint>
+                            <constraint firstItem="GAm-Od-rqc" firstAttribute="leading" secondItem="GVk-8x-NbY" secondAttribute="leading" id="ajM-hC-IeU"/>
                             <constraint firstItem="Q7j-1P-oif" firstAttribute="top" secondItem="Wma-Ms-wxi" secondAttribute="bottom" constant="67" id="c7b-OH-Z1O">
                                 <variation key="heightClass=compact" constant="60"/>
                             </constraint>
@@ -414,7 +428,6 @@
                             <constraint firstItem="Wma-Ms-wxi" firstAttribute="top" secondItem="9wj-Ls-aCT" secondAttribute="bottom" constant="45" id="nJn-cZ-c8q">
                                 <variation key="heightClass=compact" constant="12"/>
                             </constraint>
-                            <constraint firstItem="mBY-aL-07e" firstAttribute="centerX" secondItem="WVB-rw-Lrg" secondAttribute="centerX" id="snN-vg-GgO"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -424,11 +437,16 @@
                                 <exclude reference="2X4-Z3-KpY"/>
                                 <exclude reference="Cs3-Bl-zc5"/>
                                 <exclude reference="ciP-uw-cLm"/>
+                                <exclude reference="Fq7-Vx-RQk"/>
+                                <exclude reference="NWO-LR-hVX"/>
+                                <exclude reference="ajM-hC-IeU"/>
                                 <exclude reference="fCJ-ue-Pqc"/>
-                                <exclude reference="snN-vg-GgO"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
+                            <mask key="subviews">
+                                <include reference="GAm-Od-rqc"/>
+                            </mask>
                             <mask key="constraints">
                                 <exclude reference="0a2-4O-4YH"/>
                                 <include reference="2X4-Z3-KpY"/>
@@ -436,15 +454,19 @@
                                 <exclude reference="G7Q-Mm-J1l"/>
                                 <include reference="ciP-uw-cLm"/>
                                 <exclude reference="jLE-e3-fp6"/>
+                                <exclude reference="Fq7-Vx-RQk"/>
+                                <exclude reference="LdZ-PH-bCr"/>
+                                <include reference="NWO-LR-hVX"/>
+                                <include reference="ajM-hC-IeU"/>
                                 <exclude reference="eLC-X4-Umo"/>
                                 <include reference="fCJ-ue-Pqc"/>
-                                <include reference="snN-vg-GgO"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="View Item" id="hOO-dn-1RF"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="editItem" destination="GAm-Od-rqc" id="jSk-OJ-I8K"/>
                         <outlet property="viewItemDate" destination="fAw-MI-Xmr" id="FuM-wQ-jv2"/>
                         <outlet property="viewItemDesc" destination="Q7j-1P-oif" id="P71-9k-Quo"/>
                         <outlet property="viewItemTitle" destination="Wma-Ms-wxi" id="y4v-0c-oby"/>
@@ -452,7 +474,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="76H-G9-qxd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="951.5" y="-740.25"/>
+            <point key="canvasLocation" x="959" y="-282"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Hau-C4-JGW">

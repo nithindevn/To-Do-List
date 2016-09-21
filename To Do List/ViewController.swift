@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, dataEnteredDelegate, deleteDataDelegate {
-    let context=DataController()
+    let context=DataController.sharedInstance
     @IBOutlet weak var table: UITableView!
     var globalRow:Int!
     var globalObject: NSManagedObject!
@@ -18,25 +18,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        table.dataSource = self
-        table.delegate = self
-        table.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewDidAppear(animated)
         
         do{
             try list=context.reloadTableData()
-        
+            
         } catch DataController.CoreDataError.RetrievalError {
             print("Retrieval Error")
         }catch{
             print("Other Retrieval Errors")
         }
+        table.dataSource = self
+        table.delegate = self
+        table.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+
     }
-    
-    
+ 
     //AddItem delegate methods
     func userEnteredInfo(addToList:Item) {
         do{
@@ -74,12 +70,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(tableView: UITableView,
                    cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("cell",
                                                                forIndexPath: indexPath)
-        let item = list[indexPath.row]
+        
+        let item = self.list[indexPath.row]
         cell.textLabel?.text = item.title
         cell.backgroundColor = UIColor.orangeColor()
+        
         return cell
+        
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
