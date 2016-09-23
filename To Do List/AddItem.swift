@@ -14,8 +14,8 @@ protocol dataEnteredDelegate{
 }
 
 class AddItem: UIViewController,UITextFieldDelegate,UITextViewDelegate{
-    weak var activeField: UITextField?
-    weak var activeView:UITextView?
+    var activeField: UITextField?
+    var activeView:UITextView?
     @IBOutlet weak var titleField: UITextView!
     @IBOutlet weak var descField: UITextView!
     @IBOutlet weak var dateField: UITextField!
@@ -23,16 +23,12 @@ class AddItem: UIViewController,UITextFieldDelegate,UITextViewDelegate{
     var addToList=Item()
     @IBOutlet weak var viewToScroll: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
-    
+    var list=[List]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.edgesForExtendedLayout = UIRectEdge.None
-        
-        
         titleField.delegate=self
         descField.delegate=self
-        
         dateField.delegate = self
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddItem.keyboardDidShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddItem.keyboardWillBeHidden(_:)), name: UIKeyboardWillHideNotification, object: nil)
@@ -98,13 +94,42 @@ class AddItem: UIViewController,UITextFieldDelegate,UITextViewDelegate{
     
     //Clicked on Save
     @IBAction func clickedOnSave(sender: AnyObject) {
+        let currentDate=NSDate()
+        let dateFormatter=NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         if titleField.text == "" {
             let myAlert = UIAlertController(title: "Warning", message: "Title can't be empty", preferredStyle: UIAlertControllerStyle.Alert)
-            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default)
+            {(action) in
+                self.view.endEditing(true)
+            }
+            myAlert.addAction(okAction)
+            self.presentViewController(myAlert, animated: true, completion: nil)
+            
+        }
+                else if dateField.text == "" {
+            let myAlert = UIAlertController(title: "Warning", message: "Date can't be empty", preferredStyle: UIAlertControllerStyle.Alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default)
+            {(action) in
+                self.view.endEditing(true)
+            }
             myAlert.addAction(okAction)
             self.presentViewController(myAlert, animated: true, completion: nil)
         }
             
+        else if dateFormatter.dateFromString(dateField.text!)!.timeIntervalSinceReferenceDate < currentDate.timeIntervalSinceReferenceDate {
+            let myAlert=UIAlertController(title: "Invalid date", message: "Pick a valid date", preferredStyle: UIAlertControllerStyle.Alert)
+            let okAction=UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+            myAlert.addAction(okAction)
+            self.presentViewController(myAlert, animated: true, completion: nil)
+        }
+        else if checkIfInvalid(){
+            let myAlert=UIAlertController(title: "Duplicate title", message: "An item with the same title already exist", preferredStyle: UIAlertControllerStyle.Alert)
+            let okAction=UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+            myAlert.addAction(okAction)
+            self.presentViewController(myAlert, animated: true, completion: nil)
+        }
+
         else {
             addToList.title = titleField.text!
             addToList.desc = descField.text!
@@ -128,5 +153,20 @@ class AddItem: UIViewController,UITextFieldDelegate,UITextViewDelegate{
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         dateField.text = dateFormatter.stringFromDate(sender.date)
     
+    }
+    
+    func checkIfInvalid() ->Bool{
+        var result:Bool=false
+        print(list)
+        if list != []{
+            for item in list{
+                if titleField.text! == item.title! {
+                    result=true
+                }
+            }
+        }
+
+        
+        return result
     }
 }

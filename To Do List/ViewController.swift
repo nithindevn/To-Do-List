@@ -32,6 +32,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         table.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
 
     }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.table.reloadData()
+    }
  
     //AddItem delegate methods
     func userEnteredInfo(addToList:Item) {
@@ -46,7 +51,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    //ViewItemControllerDelegatemethod
+    //ViewItemControllerDelegatemethods
     func deleteItem(atIndex: Int ){
         do {
             try context.deleteData(list, index:atIndex)
@@ -58,6 +63,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         table.reloadData()
     }
+    
+
     
     //UITableviewDelegate methods
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -99,6 +106,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if segue.identifier == "showAddItem" {
             let destination:AddItem = segue.destinationViewController as! AddItem
             destination.delegate = self
+            destination.list=list
         }
         
         //Segue to viewItem
@@ -107,10 +115,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             destination.dele=self
             //destination.data = globalObject
             destination.index = globalRow
-            destination.viewTitle=String(list[globalRow].valueForKey("title")!)
-            destination.viewDesc=String(list[globalRow].valueForKey("desc")!)
-            destination.viewDate=String(list[globalRow].valueForKey("date")!)
+            destination.updatedList=list[globalRow]
+            destination.list=list
+            
         }
     }
+    
 }
 

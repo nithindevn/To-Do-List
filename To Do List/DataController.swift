@@ -14,8 +14,9 @@ class DataController: NSObject {
         case RetrievalError
         case InsertError
         case DeleteError
+        case UpdateError
     }
-    static var sharedInstance=DataController()
+    static let sharedInstance=DataController()
     
     override init() {
         // This resource is the same name as your xcdatamodeld contained in your project.
@@ -62,6 +63,8 @@ class DataController: NSObject {
         
         let object = NSManagedObject(entity: entity!,insertIntoManagedObjectContext: self.managedObjectContext) as! List
         
+        
+        
         //object.setValue(addToList.title, forKey: "title")
         //object.setValue(addToList.desc, forKey: "desc")
         //object.setValue(addToList.date, forKey: "date")
@@ -71,6 +74,9 @@ class DataController: NSObject {
         object.date = addToList.date
         
         let result=try? self.managedObjectContext.save()
+        
+        
+
         guard result != nil else{
             throw CoreDataError.InsertError
         }
@@ -78,12 +84,40 @@ class DataController: NSObject {
         
     }
     
+    //Delete item
     func deleteData(list:[List], index: Int) throws {
         self.managedObjectContext.deleteObject(list[index] as NSManagedObject)
         let result=try? self.managedObjectContext.save()
         guard result != nil else{
             throw CoreDataError.DeleteError
         }
+    }
+    
+    //Update Item
+    func updateData(list:List) throws  {
+
+        
+        
+        let fetchRequest = NSFetchRequest(entityName: "List")
+        fetchRequest.fetchLimit = 1
+        
+        let title = list.title as String!
+        fetchRequest.predicate = NSPredicate(format: "title == %@",title)
+        var objects: List
+        
+        do {
+            objects = try self.managedObjectContext.executeFetchRequest(fetchRequest)[0] as! List
+            
+            objects.title=list.title
+            objects.desc=list.desc
+            objects.date=list.date
+            
+            let result=try? self.managedObjectContext.save()
+            guard result != nil else{
+                throw CoreDataError.UpdateError
+            }
+        }
+      
     }
 }
     
