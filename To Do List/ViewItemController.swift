@@ -123,8 +123,18 @@ class ViewItemController: UIViewController,UITextFieldDelegate,UITextViewDelegat
         let currentDate=Date()
         let dateFormatter=DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.medium
-        
-        if dateFormatter.date(from: dateField.text!)!.timeIntervalSinceReferenceDate < currentDate.timeIntervalSinceReferenceDate {
+        if titleField.text == "" {
+            let myAlert = UIAlertController(title: "Warning", message: "Title can't be empty", preferredStyle: UIAlertControllerStyle.alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default)
+            {(action) in
+                self.view.endEditing(true)
+            }
+            myAlert.addAction(okAction)
+            self.present(myAlert, animated: true, completion: nil)
+            
+        }
+
+        else if dateFormatter.date(from: dateField.text!)!.timeIntervalSinceReferenceDate < currentDate.timeIntervalSinceReferenceDate {
             let myAlert=UIAlertController(title: "Invalid date", message: "Pick a valid date", preferredStyle: UIAlertControllerStyle.alert)
             let okAction=UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
             myAlert.addAction(okAction)
