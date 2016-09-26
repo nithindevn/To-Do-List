@@ -10,7 +10,7 @@ import UIKit
 
 protocol dataEnteredDelegate{
 
-    func userEnteredInfo(addToList:Item)
+    func userEnteredInfo(_ addToList:Item)
 }
 
 class AddItem: UIViewController,UITextFieldDelegate,UITextViewDelegate{
@@ -26,20 +26,20 @@ class AddItem: UIViewController,UITextFieldDelegate,UITextViewDelegate{
     var list=[List]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.edgesForExtendedLayout = UIRectEdge.None
+        self.edgesForExtendedLayout = UIRectEdge()
         titleField.delegate=self
         descField.delegate=self
         dateField.delegate = self
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddItem.keyboardDidShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddItem.keyboardWillBeHidden(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AddItem.keyboardDidShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AddItem.keyboardWillBeHidden(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AddItem.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
     
-    func keyboardDidShow(notification: NSNotification) {
+    func keyboardDidShow(_ notification: Notification) {
         
         if (self.activeField != nil || self.activeView != nil) {
-            let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
+            let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
             let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize!.height, right: 0.0)
             
             self.scrollView.contentInset = contentInsets
@@ -47,8 +47,8 @@ class AddItem: UIViewController,UITextFieldDelegate,UITextViewDelegate{
         }
     }
     
-    func keyboardWillBeHidden(notification: NSNotification) {
-        let contentInsets = UIEdgeInsetsZero
+    func keyboardWillBeHidden(_ notification: Notification) {
+        let contentInsets = UIEdgeInsets.zero
         self.scrollView.contentInset = contentInsets
         self.scrollView.scrollIndicatorInsets = contentInsets
     }
@@ -60,7 +60,7 @@ class AddItem: UIViewController,UITextFieldDelegate,UITextViewDelegate{
 
     //UITextFieldDelegate method-->calls whenever the current text changes
     //To disable the textField
-     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField==self.dateField{
             return false
         }
@@ -69,65 +69,65 @@ class AddItem: UIViewController,UITextFieldDelegate,UITextViewDelegate{
         }
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         self.activeField = nil
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         self.activeField = textField
         if textField==dateField{
             let datePickerView = UIDatePicker()
-            datePickerView.datePickerMode = UIDatePickerMode.Date
+            datePickerView.datePickerMode = UIDatePickerMode.date
             textField.inputView = datePickerView
-            datePickerView.addTarget(self, action: #selector(AddItem.datePickerValueChanged), forControlEvents: UIControlEvents.ValueChanged)
+            datePickerView.addTarget(self, action: #selector(AddItem.datePickerValueChanged), for: UIControlEvents.valueChanged)
         }
     }
     
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         self.activeView = textView
         return true
     }
     
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         self.activeView=nil
     }
     
     //Clicked on Save
-    @IBAction func clickedOnSave(sender: AnyObject) {
-        let currentDate=NSDate()
-        let dateFormatter=NSDateFormatter()
-        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+    @IBAction func clickedOnSave(_ sender: AnyObject) {
+        let currentDate=Date()
+        let dateFormatter=DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.medium
         if titleField.text == "" {
-            let myAlert = UIAlertController(title: "Warning", message: "Title can't be empty", preferredStyle: UIAlertControllerStyle.Alert)
-            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default)
+            let myAlert = UIAlertController(title: "Warning", message: "Title can't be empty", preferredStyle: UIAlertControllerStyle.alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default)
             {(action) in
                 self.view.endEditing(true)
             }
             myAlert.addAction(okAction)
-            self.presentViewController(myAlert, animated: true, completion: nil)
+            self.present(myAlert, animated: true, completion: nil)
             
         }
                 else if dateField.text == "" {
-            let myAlert = UIAlertController(title: "Warning", message: "Date can't be empty", preferredStyle: UIAlertControllerStyle.Alert)
-            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default)
+            let myAlert = UIAlertController(title: "Warning", message: "Date can't be empty", preferredStyle: UIAlertControllerStyle.alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default)
             {(action) in
                 self.view.endEditing(true)
             }
             myAlert.addAction(okAction)
-            self.presentViewController(myAlert, animated: true, completion: nil)
+            self.present(myAlert, animated: true, completion: nil)
         }
             
-        else if dateFormatter.dateFromString(dateField.text!)!.timeIntervalSinceReferenceDate < currentDate.timeIntervalSinceReferenceDate {
-            let myAlert=UIAlertController(title: "Invalid date", message: "Pick a valid date", preferredStyle: UIAlertControllerStyle.Alert)
-            let okAction=UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        else if dateFormatter.date(from: dateField.text!)!.timeIntervalSinceReferenceDate < currentDate.timeIntervalSinceReferenceDate {
+            let myAlert=UIAlertController(title: "Invalid date", message: "Pick a valid date", preferredStyle: UIAlertControllerStyle.alert)
+            let okAction=UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
             myAlert.addAction(okAction)
-            self.presentViewController(myAlert, animated: true, completion: nil)
+            self.present(myAlert, animated: true, completion: nil)
         }
         else if checkIfInvalid(){
-            let myAlert=UIAlertController(title: "Duplicate title", message: "An item with the same title already exist", preferredStyle: UIAlertControllerStyle.Alert)
-            let okAction=UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+            let myAlert=UIAlertController(title: "Duplicate title", message: "An item with the same title already exist", preferredStyle: UIAlertControllerStyle.alert)
+            let okAction=UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
             myAlert.addAction(okAction)
-            self.presentViewController(myAlert, animated: true, completion: nil)
+            self.present(myAlert, animated: true, completion: nil)
         }
 
         else {
@@ -136,22 +136,22 @@ class AddItem: UIViewController,UITextFieldDelegate,UITextViewDelegate{
             addToList.date = dateField.text!
             if (delegate != nil){
                 delegate!.userEnteredInfo(addToList)
-                self.navigationController?.popViewControllerAnimated(true)
+                _=self.navigationController?.popViewController(animated: true)
         
             }
         }
     }
     
     //Clicked on Cancel
-    @IBAction func clickedOnCancel(sender: AnyObject) {
+    @IBAction func clickedOnCancel(_ sender: AnyObject) {
         
-        self.navigationController?.popViewControllerAnimated(true)
+        _=self.navigationController?.popViewController(animated:true)
     }
     
-    func datePickerValueChanged(sender:UIDatePicker) {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        dateField.text = dateFormatter.stringFromDate(sender.date)
+    func datePickerValueChanged(_ sender:UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.medium
+        dateField.text = dateFormatter.string(from: sender.date)
     
     }
     

@@ -22,29 +22,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         do{
             try list=context.reloadTableData()
             
-        } catch DataController.CoreDataError.RetrievalError {
+        } catch DataController.CoreDataError.retrievalError {
             print("Retrieval Error")
         }catch{
             print("Other Retrieval Errors")
         }
         table.dataSource = self
         table.delegate = self
-        table.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
 
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.table.reloadData()
     }
  
     //AddItem delegate methods
-    func userEnteredInfo(addToList:Item) {
+    func userEnteredInfo(_ addToList:Item) {
         do{
             let object = try context.insertData(addToList)
             list.append(object)
             table.reloadData()
-        }catch DataController.CoreDataError.InsertError{
+        }catch DataController.CoreDataError.insertError{
             print("Insertion Error")
         }catch{
             print("Other Insertion Errors")
@@ -52,11 +52,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     //ViewItemControllerDelegatemethods
-    func deleteItem(atIndex: Int ){
+    func deleteItem(_ atIndex: Int ){
         do {
             try context.deleteData(list, index:atIndex)
-            list.removeAtIndex(atIndex)
-        }catch DataController.CoreDataError.DeleteError{
+            list.remove(at: atIndex)
+        }catch DataController.CoreDataError.deleteError{
             print("Deletion Error ")
         }catch{
             print("Other Deletion Errors")
@@ -67,51 +67,51 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     
     //UITableviewDelegate methods
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return list.count
     }
     
-    func tableView(tableView: UITableView,
-                   cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell",
-                                                               forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell",
+                                                               for: indexPath)
         
-        let item = self.list[indexPath.row]
+        let item = self.list[(indexPath as NSIndexPath).row]
         cell.textLabel?.text = item.title
-        cell.backgroundColor = UIColor.orangeColor()
+        cell.backgroundColor = UIColor.orange
         
         return cell
         
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
-                   forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell,
+                   forRowAt indexPath: IndexPath) {
         
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let row = indexPath.row
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let row = (indexPath as NSIndexPath).row
         globalRow = row
-        self.performSegueWithIdentifier("viewitem", sender: nil);
+        self.performSegue(withIdentifier: "viewitem", sender: nil);
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //Segue to AddItem
         if segue.identifier == "showAddItem" {
-            let destination:AddItem = segue.destinationViewController as! AddItem
+            let destination:AddItem = segue.destination as! AddItem
             destination.delegate = self
             destination.list=list
         }
         
         //Segue to viewItem
         if  segue.identifier == "viewitem" {
-            let destination: ViewItemController = segue.destinationViewController as! ViewItemController
+            let destination: ViewItemController = segue.destination as! ViewItemController
             destination.dele=self
             //destination.data = globalObject
             destination.index = globalRow
