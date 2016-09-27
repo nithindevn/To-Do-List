@@ -158,6 +158,7 @@ class AddItem: UIViewController,UITextFieldDelegate,UITextViewDelegate{
     func checkIfInvalid() ->Bool{
         var result:Bool=false
         print(list)
+        
         if list != []{
             for item in list{
                 if titleField.text! == item.title! {
